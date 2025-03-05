@@ -15,18 +15,18 @@ export default function ProductForm({
     const [price, setPrice] = useState(existingPrice || '');
     const [goToProducts, setGoToProducts] = useState(false);
     const router = useRouter();
+    console.log({_id});
     async function saveProduct(ev){
         ev.preventDefault();
         const data = {title, description, price};
         if (_id){
             //update
-            await axios.put('api/products', {...data,_id});
-
+            await axios.put('/api/products', {...data,_id});
         } else {
             //create
             await axios.post('/api/products', data);
-            setGoToProducts(true);
         }
+        setGoToProducts(true);
     }
 
     if (goToProducts){
